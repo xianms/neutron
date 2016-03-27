@@ -218,6 +218,12 @@ class L3Scheduler(object):
     def _schedule_router(self, plugin, context, router_id,
                          candidates=None):
         sync_router = plugin.get_router(context, router_id)
+        import pdb
+        #pdb.set_trace()
+        name = sync_router.get('name', '')
+        if name[-len('vpn'):] != 'vpn':
+            return
+
         candidates = candidates or self._get_candidates(
             plugin, context, sync_router)
         if not candidates:
